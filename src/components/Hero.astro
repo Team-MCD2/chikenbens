@@ -49,21 +49,42 @@ import { SITE, USPS } from '../data/site';
     </div>
 
     <div class="relative lg:col-span-5">
-      <!-- Halo lumineux radial derrière le logo (pas de cadre solide) -->
-      <div
-        class="absolute inset-0 -z-0 mx-auto aspect-square max-w-md rounded-full bg-[radial-gradient(circle_at_center,rgba(245,166,35,0.35)_0%,rgba(245,166,35,0.15)_40%,transparent_70%)] blur-2xl"
-        aria-hidden="true"
-      ></div>
+      <!-- Cadre rectangulaire style poster / affiche -->
+      <div class="relative mx-auto w-full max-w-md rotate-[-2deg]">
+        <!-- halo doré diffus derrière -->
+        <div
+          class="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(245,166,35,0.35)_0%,transparent_70%)] blur-2xl"
+          aria-hidden="true"
+        ></div>
 
-      <img
-        src="/images/logo.png"
-        alt="Logo Chicken Ben's Restaurant - poulet cartoon"
-        width="600"
-        height="600"
-        class="animate-float relative mx-auto aspect-square w-full max-w-md object-contain drop-shadow-[8px_8px_0_rgba(230,51,40,0.35)]"
-        loading="eager"
-        fetchpriority="high"
-      />
+        <!-- le cadre rectangulaire avec fond "tenders" -->
+        <div
+          class="relative overflow-hidden rounded-3xl border-4 border-mustard p-4 shadow-[10px_10px_0_0_#E63328] sm:p-6"
+          style="background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;"
+        >
+          <!-- overlay sombre + teinte moutarde pour lisibilité du logo -->
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-ink/70 via-ink/40 to-rooster/50"
+            aria-hidden="true"
+          ></div>
+
+          <!-- liseré pointillé interne -->
+          <div
+            class="absolute inset-3 rounded-2xl border-2 border-dashed border-mustard/60"
+            aria-hidden="true"
+          ></div>
+
+          <img
+            src="/images/logo.png"
+            alt="Logo Chicken Ben's Restaurant - poulet cartoon"
+            width="600"
+            height="600"
+            class="animate-float relative mx-auto aspect-square w-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
 
       <!-- badges flottants -->
       <span class="absolute -top-3 left-4 z-10 rotate-[-10deg] rounded-full bg-rooster px-4 py-2 font-display text-sm uppercase text-cream shadow-pop">
