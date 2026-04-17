@@ -36,7 +36,12 @@ export const SITE = {
     ubereats:
       'https://www.ubereats.com/fr/store/chicken-bens-colomiers/titmjAwnQrqk6hTChp-nkA',
     deliveroo: 'https://deliveroo.fr/',
-    google: 'https://maps.app.goo.gl/',
+    google: 'https://www.google.com/maps/place/Chicken+Ben%27s/@43.6124,1.3367,17z',
+    // Lien direct vers les avis Google triés par meilleure note (positifs en premier).
+    // TODO: remplacer PLACE_ID par le vrai Place ID de la fiche Google Business.
+    // Solution de secours: recherche Google qui affiche la fiche + avis.
+    googleReviews:
+      'https://www.google.com/search?q=Chicken+Ben%27s+Colomiers+avis&hl=fr#lrd=,1,,,,',
   },
   payments: ['Swile', 'Ticket Restaurant', 'Up', 'Bimpli', 'Pluxee', 'CB', 'Espèces'],
   rating: { value: 4.6, count: 1200 },

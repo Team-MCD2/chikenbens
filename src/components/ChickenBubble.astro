@@ -6,29 +6,37 @@ import { SITE } from '../data/site';
 <section class="relative overflow-hidden bg-mustard py-16 sm:py-24">
   <div class="absolute inset-0 bg-diag-stripes opacity-40" aria-hidden="true"></div>
 
+  <!--
+    Layout :
+    - Mobile (1 col)  : Bulle  →  Poulet  →  Boutons
+    - Desktop (2 col) : Poulet à gauche / Bulle + Boutons à droite
+  -->
   <div class="container-x relative grid items-end gap-8 md:grid-cols-2">
-    <!-- Poulet -->
-    <div class="relative order-2 md:order-1">
-      <img
-        src="/images/chicken-thumbs.png"
-        alt="Mascotte poulet Chicken Ben's faisant un pouce en l'air"
-        class="animate-wiggle mx-auto w-full max-w-md drop-shadow-[8px_8px_0_rgba(11,11,11,0.25)]"
-        loading="lazy"
-        width="1000"
-        height="900"
-      />
-    </div>
-
-    <!-- Bulle de dialogue -->
-    <div class="order-1 md:order-2">
+    <!-- 1. Bulle de dialogue (en premier sur mobile, à droite sur desktop) -->
+    <div class="order-1 md:order-2 md:col-start-2">
       <div class="speech-bubble mx-auto max-w-xl rotate-[-1.5deg]">
         <p class="text-2xl sm:text-3xl md:text-4xl leading-snug text-ink">
           Et toi… <span class="text-rooster">quand est-ce que tu passes</span>
           casser la graine chez <strong class="font-display uppercase tracking-wider">Chicken Ben's</strong> ?
         </p>
       </div>
+    </div>
 
-      <div class="mt-8 flex flex-wrap gap-3 md:justify-start">
+    <!-- 2. Mascotte poulet (juste sous la bulle sur mobile, à gauche sur desktop) -->
+    <div class="relative order-2 md:order-1 md:col-start-1 md:row-span-2 md:self-end">
+      <img
+        src="/images/chicken-thumbs.png"
+        alt="Mascotte poulet Chicken Ben's faisant un pouce en l'air"
+        class="animate-wiggle mx-auto w-full max-w-md"
+        loading="lazy"
+        width="1000"
+        height="900"
+      />
+    </div>
+
+    <!-- 3. CTA (en bas sur mobile, sous la bulle à droite sur desktop) -->
+    <div class="order-3 md:col-start-2">
+      <div class="flex flex-wrap justify-center gap-3 md:justify-start">
         <a href="#contact" class="btn-primary">On arrive !</a>
         <a
           href={SITE.social.ubereats}
