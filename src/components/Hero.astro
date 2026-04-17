@@ -57,20 +57,24 @@ import { SITE, USPS } from '../data/site';
           aria-hidden="true"
         ></div>
 
-        <!-- le cadre rectangulaire avec fond "tenders" -->
+        <!-- cadre rectangle avec photo de tenders en fond -->
         <div
           class="relative overflow-hidden rounded-3xl border-4 border-mustard p-4 shadow-[10px_10px_0_0_#E63328] sm:p-6"
-          style="background-image: url('https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;"
+          style="background-image: url('/images/hero-chicken-trays.png'); background-size: cover; background-position: center;"
         >
-          <!-- overlay sombre + teinte moutarde pour lisibilité du logo -->
+          <!-- voile sombre pour faire ressortir le logo -->
           <div
-            class="absolute inset-0 bg-gradient-to-br from-ink/70 via-ink/40 to-rooster/50"
+            class="absolute inset-0 bg-gradient-to-br from-ink/60 via-ink/30 to-ink/70"
             aria-hidden="true"
           ></div>
-
+          <!-- halo radial doré centré -->
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,166,35,0.25)_0%,transparent_60%)]"
+            aria-hidden="true"
+          ></div>
           <!-- liseré pointillé interne -->
           <div
-            class="absolute inset-3 rounded-2xl border-2 border-dashed border-mustard/60"
+            class="absolute inset-3 rounded-2xl border-2 border-dashed border-cream/40"
             aria-hidden="true"
           ></div>
 
@@ -79,7 +83,7 @@ import { SITE, USPS } from '../data/site';
             alt="Logo Chicken Ben's Restaurant - poulet cartoon"
             width="600"
             height="600"
-            class="animate-float relative mx-auto aspect-square w-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]"
+            class="animate-float relative mx-auto aspect-square w-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
             loading="eager"
             fetchpriority="high"
           />
