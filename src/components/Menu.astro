@@ -1,0 +1,58 @@
+---
+import { MENU } from '../data/site';
+---
+
+<section id="menu" class="relative py-20 sm:py-28">
+  <div class="container-x">
+    <div class="flex flex-col items-center text-center">
+      <span class="section-eyebrow">Notre carte</span>
+      <h2 class="section-title">Qu'est-ce qui te fait envie ?</h2>
+      <p class="mt-4 max-w-2xl font-body text-ink/70">
+        Une carte courte, honnête, taillée pour les vrais. Tous nos plats sont préparés à la commande
+        avec du poulet halal frais, du pain livré chaque matin et des sauces maison.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-8 lg:grid-cols-2">
+      {
+        MENU.map((cat) => (
+          <article class="card">
+            <header class="mb-6 flex items-center justify-between gap-3 border-b-2 border-dashed border-ink/20 pb-4">
+              <h3 class="flex items-center gap-3 font-heading text-2xl uppercase">
+                <span class="text-3xl" aria-hidden="true">{cat.emoji}</span>
+                {cat.cat}
+              </h3>
+            </header>
+            <p class="mb-5 font-body text-sm text-ink/70">{cat.desc}</p>
+
+            <ul class="divide-y divide-ink/10">
+              {cat.items.map((item) => (
+                <li class="flex items-center justify-between gap-4 py-3">
+                  <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="font-display text-base uppercase text-ink">{item.name}</span>
+                      {'tag' in item && item.tag ? (
+                        <span class="chip !bg-mustard/20 !text-mustard-700">{item.tag}</span>
+                      ) : null}
+                      {'rating' in item && item.rating ? (
+                        <span class="chip">👍 {item.rating}%</span>
+                      ) : null}
+                    </div>
+                  </div>
+                  <span class="whitespace-nowrap font-heading text-lg text-rooster">{item.price}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="mb-4 font-hand text-2xl text-ink/70">Faim ? Il suffit d'un clic 👇</p>
+      <a href="https://www.ubereats.com/fr/store/chicken-bens-colomiers/titmjAwnQrqk6hTChp-nkA" target="_blank" rel="noopener" class="btn-primary">
+        Commander sur Uber Eats
+      </a>
+    </div>
+  </div>
+</section>

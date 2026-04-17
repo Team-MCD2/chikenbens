@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="#0B0B0B"/>
+  <path d="M22 20 C22 14, 30 10, 36 14 C42 12, 46 18, 44 24 L40 26 L40 32 L24 32 L20 26 C18 22, 20 20, 22 20Z" fill="#fff"/>
+  <path d="M30 12 C32 8, 38 8, 40 14 L36 16 Z" fill="#E63328"/>
+  <polygon points="40,24 48,26 40,30" fill="#FFB703"/>
+  <text x="32" y="54" font-family="Impact, sans-serif" font-size="11" fill="#F5A623" text-anchor="middle">BEN'S</text>
+</svg>

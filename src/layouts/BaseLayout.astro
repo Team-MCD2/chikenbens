@@ -1,0 +1,157 @@
+---
+import '../styles/global.css';
+import { SITE, FAQ } from '../data/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${SITE.name} — ${SITE.tagline}`,
+  description = SITE.description,
+  image = '/images/og-chickenbens.jpg',
+  canonical = Astro.url.href,
+  noindex = false,
+} = Astro.props;
+
+// Schema.org — LocalBusiness (Restaurant) pour SEO local / GEO
+const localBusinessLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: SITE.name,
+  image: `${SITE.url}/images/logo.png`,
+  '@id': SITE.url,
+  url: SITE.url,
+  telephone: SITE.phone,
+  email: SITE.email,
+  priceRange: '€€',
+  servesCuisine: ['American', 'Fast Food', 'Burger', 'Tacos', 'Halal', 'Poulet frit'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    postalCode: SITE.address.postal,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.address.lat,
+    longitude: SITE.address.lng,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '11:30',
+      closes: '23:45',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '18:00',
+      closes: '23:45',
+    },
+  ],
+  acceptsReservations: 'False',
+  paymentAccepted: 'Cash, Credit Card, Swile, Ticket Restaurant, Up, Bimpli, Pluxee',
+  hasMenu: `${SITE.url}/#menu`,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: SITE.rating.value,
+    reviewCount: SITE.rating.count,
+  },
+  sameAs: [SITE.social.facebook, SITE.social.instagram, SITE.social.ubereats],
+};
+
+// Schema.org — FAQPage (rich results Google)
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {!noindex && <meta name="robots" content="index,follow,max-image-preview:large" />}
+
+    <!-- SEO / Auteur -->
+    <meta name="author" content={SITE.name} />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="keywords"
+      content="poulet frit Colomiers, poulet frit Toulouse, tacos Colomiers, burger halal Colomiers, chicken bens, restaurant Colomiers, tenders tikka, livraison poulet Toulouse, fast food halal 31770"
+    />
+
+    <!-- GEO Tags (SEO local) -->
+    <meta name="geo.region" content="FR-31" />
+    <meta name="geo.placename" content="Colomiers, Toulouse, Occitanie" />
+    <meta name="geo.position" content={`${SITE.address.lat};${SITE.address.lng}`} />
+    <meta name="ICBM" content={`${SITE.address.lat}, ${SITE.address.lng}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant.restaurant" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, SITE.url).href} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, SITE.url).href} />
+
+    <!-- Favicon / icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/logo.png" />
+    <meta name="theme-color" content="#0B0B0B" />
+    <meta name="msapplication-TileColor" content="#E63328" />
+
+    <!-- Fonts (preconnect + display swap pour perf) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bungee&family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Preload image hero (LCP) -->
+    <link rel="preload" as="image" href="/images/logo.png" fetchpriority="high" />
+
+    <!-- JSON-LD : LocalBusiness + FAQ -->
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-cream"
+      >Aller au contenu</a
+    >
+
+    <slot />
+  </body>
+</html>

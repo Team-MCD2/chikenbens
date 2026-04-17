@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { LEGAL, SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Mentions légales — Chicken Ben's"
+  description="Mentions légales du site Chicken Ben's : éditeur, hébergeur, conditions d'utilisation, données personnelles et cookies."
+  noindex
+>
+  <Header />
+  <main id="main" class="bg-cream py-16 sm:py-24">
+    <article class="container-x max-w-4xl">
+      <span class="section-eyebrow">Informations légales</span>
+      <h1 class="section-title">Mentions légales</h1>
+      <p class="mt-3 text-sm text-ink/60">
+        Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })}
+      </p>
+
+      <div class="prose prose-lg mt-10 max-w-none font-body text-ink/85">
+        <h2 class="font-heading text-2xl uppercase text-ink">1. Éditeur du site</h2>
+        <p>
+          Le site <strong>{SITE.url}</strong> est édité par la société :
+        </p>
+        <ul>
+          <li><strong>Dénomination sociale :</strong> {LEGAL.denomination}</li>
+          <li><strong>Forme juridique :</strong> {LEGAL.forme}</li>
+          <li><strong>Capital social :</strong> {LEGAL.capital}</li>
+          <li><strong>Siège social :</strong> {LEGAL.siege}</li>
+          <li><strong>SIRET :</strong> {LEGAL.siret}</li>
+          <li><strong>SIREN :</strong> {LEGAL.siren}</li>
+          <li><strong>N° TVA intracommunautaire :</strong> {LEGAL.tva}</li>
+          <li><strong>Immatriculation :</strong> {LEGAL.rcs}</li>
+          <li><strong>Téléphone :</strong> <a href={`tel:${SITE.phone.replace(/\s/g,'')}`}>{SITE.phoneDisplay}</a></li>
+          <li><strong>Email :</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><strong>Directeur de la publication :</strong> {LEGAL.directeurPublication}</li>
+        </ul>
+
+        <h2 class="font-heading text-2xl uppercase text-ink">2. Hébergement</h2>
+        <p>Le site est hébergé par :</p>
+        <ul>
+          <li><strong>{LEGAL.hebergeur.nom}</strong></li>
+          <li>{LEGAL.hebergeur.adresse}</li>
+          <li>Tél : {LEGAL.hebergeur.telephone}</li>
+        </ul>
+
+        <h2 class="font-heading text-2xl uppercase text-ink">3. Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des éléments présents sur ce site (textes, images, logos, graphismes, vidéos,
+          icônes, etc.) ainsi que la structure du site sont la propriété exclusive de
+          {' '}{LEGAL.denomination} ou font l'objet d'une autorisation d'utilisation. Toute
+          reproduction, représentation, modification, publication, adaptation — totale ou partielle —
+          des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans
+          autorisation écrite préalable.
+        </p>
+
+        <h2 class="font-heading text-2xl uppercase text-ink" id="confidentialite">4. Données personnelles (RGPD)</h2>
+        <p>
+          Conformément au Règlement (UE) 2016/679 (RGPD) et à la loi « Informatique et Libertés » du
+          6 janvier 1978 modifiée, vous disposez d'un droit d'accès, de rectification, d'effacement,
+          de limitation, de portabilité et d'opposition concernant vos données personnelles.
+        </p>
+        <p>
+          Pour exercer ces droits, contactez-nous par email à
+          {' '}<a href={`mailto:${SITE.email}`}>{SITE.email}</a> ou par courrier à
+          l'adresse du siège social indiquée ci-dessus.
+        </p>
+        <p>
+          Vous disposez également du droit d'introduire une réclamation auprès de la CNIL
+          (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>).
+        </p>
+
+        <h2 class="font-heading text-2xl uppercase text-ink" id="cookies">5. Cookies</h2>
+        <p>
+          Ce site utilise des cookies strictement nécessaires à son fonctionnement, ainsi que, sous
+          réserve de votre consentement, des cookies de mesure d'audience et des cookies de services
+          tiers (cartes, réseaux sociaux, plateformes de livraison).
+        </p>
+        <p>
+          Vous pouvez à tout moment modifier vos préférences via les paramètres de votre navigateur.
+        </p>
+
+        <h2 class="font-heading text-2xl uppercase text-ink">6. Responsabilité</h2>
+        <p>
+          {LEGAL.denomination} s'efforce de fournir sur ce site des informations aussi précises que
+          possible. Toutefois, elle ne pourra être tenue responsable des omissions, inexactitudes ou
+          carences dans la mise à jour, qu'elles soient de son fait ou du fait de tiers partenaires
+          qui lui fournissent ces informations.
+        </p>
+
+        <h2 class="font-heading text-2xl uppercase text-ink">7. Droit applicable</h2>
+        <p>
+          Le présent site et ses mentions légales sont soumis au droit français. En cas de litige,
+          compétence est donnée aux tribunaux français.
+        </p>
+      </div>
+
+      <p class="mt-10">
+        <a href="/" class="btn-ghost">← Retour à l'accueil</a>
+      </p>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

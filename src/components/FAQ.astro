@@ -1,0 +1,38 @@
+---
+import { FAQ } from '../data/site';
+---
+
+<section id="faq" class="bg-white py-20 sm:py-28">
+  <div class="container-x max-w-4xl">
+    <div class="flex flex-col items-center text-center">
+      <span class="section-eyebrow">Questions fréquentes</span>
+      <h2 class="section-title">FAQ</h2>
+      <p class="mt-4 max-w-xl font-body text-ink/70">
+        Les réponses aux questions que vous nous posez le plus souvent. Une question qui n'y est pas ?
+        <a href="#contact" class="font-semibold text-rooster underline">Écrivez-nous</a>.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-4">
+      {
+        FAQ.map((f, i) => (
+          <details class="group rounded-2xl border-2 border-ink bg-cream p-5 shadow-[4px_4px_0_0_#0B0B0B] transition-all open:shadow-pop">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+              <span class="font-heading text-lg text-ink sm:text-xl">
+                <span class="mr-2 font-display text-rooster">{String(i + 1).padStart(2, '0')}.</span>
+                {f.q}
+              </span>
+              <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-mustard transition-transform group-open:rotate-45"
+                aria-hidden="true"
+              >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="mt-4 border-t border-ink/10 pt-4 font-body text-ink/80">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+---
+import { SITE, USPS } from '../data/site';
+---
+
+<section class="relative overflow-hidden bg-ink text-cream">
+  <!-- motifs -->
+  <div class="absolute inset-0 bg-diag-stripes opacity-60" aria-hidden="true"></div>
+  <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-rooster/20 blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-mustard/20 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-x relative grid items-center gap-10 py-16 lg:grid-cols-12 lg:py-24">
+    <div class="lg:col-span-7">
+      <span class="section-eyebrow">
+        Restaurant · Colomiers · Toulouse
+      </span>
+      <h1 class="mt-2 font-display text-5xl uppercase leading-[0.95] sm:text-6xl lg:text-8xl">
+        <span class="block text-mustard">Juicy.</span>
+        <span class="block">Crispy.</span>
+        <span class="block text-rooster">Ben's.</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl font-body text-lg text-cream/80">
+        Le spécialiste du <strong class="text-cream">poulet frit frais & halal</strong> à
+        Colomiers et Toulouse. Pané à la main chaque matin, cuit à la commande,
+        servi avec des sauces maison qui claquent.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#menu" class="btn-primary">Voir la carte</a>
+        <a href={SITE.social.ubereats} target="_blank" rel="noopener" class="btn-secondary">
+          Commander en ligne
+        </a>
+        <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} class="btn-ghost !border-cream !text-cream hover:!bg-cream hover:!text-ink">
+          📞 {SITE.phoneDisplay}
+        </a>
+      </div>
+
+      <!-- note clients -->
+      <div class="mt-8 flex items-center gap-4 text-sm">
+        <div class="flex items-center gap-1 text-mustard" aria-label="Note 4,6 sur 5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <svg class={`h-5 w-5 ${i < Math.round(SITE.rating.value) ? 'fill-mustard' : 'fill-cream/20'}`} viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.2 1 5.9L10 15l-5.3 2.8 1-5.9L1.4 7.7l5.9-.9z"/></svg>
+          ))}
+        </div>
+        <span class="text-cream/80">
+          <strong class="text-cream">{SITE.rating.value}/5</strong> — {SITE.rating.count}+ clients conquis
+        </span>
+      </div>
+    </div>
+
+    <div class="relative lg:col-span-5">
+      <!-- Cadre poster derrière le logo -->
+      <div class="poster relative mx-auto aspect-square w-full max-w-md rotate-[-3deg] bg-crust p-6">
+        <div class="absolute inset-2 rounded-[1.5rem] border-2 border-dashed border-ink/30"></div>
+        <img
+          src="/images/logo.png"
+          alt="Logo Chicken Ben's Restaurant - poulet cartoon"
+          width="600"
+          height="600"
+          class="animate-float mx-auto h-full w-full object-contain"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <!-- badges flottants -->
+      <span class="absolute -top-3 left-4 rotate-[-10deg] rounded-full bg-rooster px-4 py-2 font-display text-sm uppercase text-cream shadow-pop">
+        100% Halal
+      </span>
+      <span class="absolute -bottom-3 right-2 rotate-[8deg] rounded-full bg-mustard px-4 py-2 font-display text-sm uppercase text-ink shadow-pop">
+        Frais jamais surgelé
+      </span>
+    </div>
+  </div>
+
+  <!-- USP bar -->
+  <div class="border-t border-cream/10 bg-black/40 backdrop-blur">
+    <div class="container-x grid grid-cols-2 divide-x divide-cream/10 sm:grid-cols-4">
+      {
+        USPS.map((u) => (
+          <div class="flex items-center gap-3 px-4 py-4">
+            <span class="text-2xl" aria-hidden="true">{u.icon}</span>
+            <div>
+              <p class="font-display text-sm uppercase text-mustard">{u.title}</p>
+              <p class="text-xs text-cream/70">{u.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

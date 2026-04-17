@@ -1,0 +1,25 @@
+---
+// Bandeau marquee (annonce défilante en haut)
+const items = [
+  '🔥 Nouveau : Menu Tacos Tikka — 13,26 €',
+  '🛵 Livraison Uber Eats & Deliveroo',
+  '🐔 100% poulet frais & halal',
+  '🎟️ On accepte Swile, Ticket Restaurant, Up, Bimpli, Pluxee',
+  '⭐ 4,6/5 sur +1000 avis clients',
+];
+// duplication pour boucle infinie
+const row = [...items, ...items];
+---
+
+<div class="bg-ink text-cream">
+  <div class="mask-fade-x overflow-hidden py-2">
+    <div class="flex w-max animate-marquee gap-8 whitespace-nowrap font-display text-xs uppercase tracking-widest">
+      {row.map((it) => (
+        <span class="flex items-center gap-8">
+          <span>{it}</span>
+          <span class="text-mustard">★</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

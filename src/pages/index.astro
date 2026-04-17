@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Announce from '../components/Announce.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Menu from '../components/Menu.astro';
+import About from '../components/About.astro';
+import Reviews from '../components/Reviews.astro';
+import ChickenBubble from '../components/ChickenBubble.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Chicken Ben's — Poulet frit frais & halal à Colomiers · Toulouse"
+  description="Chicken Ben's, le spécialiste du poulet frit frais et halal à Colomiers & Toulouse. Burgers, tacos, tenders tikka, wraps & buckets. Sur place, à emporter ou en livraison Uber Eats."
+>
+  <Announce />
+  <Header />
+  <main id="main">
+    <Hero />
+    <Menu />
+    <About />
+    <Reviews />
+    <ChickenBubble />
+    <FAQ />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>
