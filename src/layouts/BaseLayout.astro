@@ -13,10 +13,15 @@ export interface Props {
 const {
   title = `${SITE.name} — ${SITE.tagline}`,
   description = SITE.description,
-  image = '/images/og-chickenbens.jpg',
+  // Image par défaut affichée dans les aperçus de lien (Facebook, WhatsApp, iMessage, LinkedIn, etc.)
+  // Le logo est utilisé car il est reconnaissable et fidèle à la marque.
+  image = '/images/logo.png',
   canonical = Astro.url.href,
   noindex = false,
 } = Astro.props;
+
+// URL absolue de l'image pour les crawlers sociaux (obligatoire)
+const absoluteImage = new URL(image, SITE.url).href;
 
 // Schema.org — LocalBusiness (Restaurant) pour SEO local / GEO
 const localBusinessLd = {
@@ -24,6 +29,7 @@ const localBusinessLd = {
   '@type': 'Restaurant',
   name: SITE.name,
   image: `${SITE.url}/images/logo.png`,
+  logo: `${SITE.url}/images/logo.png`,
   '@id': SITE.url,
   url: SITE.url,
   telephone: SITE.phone,
@@ -108,20 +114,26 @@ const faqLd = {
     <meta name="geo.position" content={`${SITE.address.lat};${SITE.address.lng}`} />
     <meta name="ICBM" content={`${SITE.address.lat}, ${SITE.address.lng}`} />
 
-    <!-- Open Graph -->
+    <!-- Open Graph (aperçu des liens : Facebook, WhatsApp, iMessage, LinkedIn, Discord, Slack, Signal, Telegram…) -->
     <meta property="og:type" content="restaurant.restaurant" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content={SITE.locale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, SITE.url).href} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:secure_url" content={absoluteImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={`Logo ${SITE.name}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, SITE.url).href} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={`Logo ${SITE.name}`} />
 
     <!-- Favicon / icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
