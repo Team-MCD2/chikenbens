@@ -29,13 +29,13 @@ export default {
       },
       fontFamily: {
         // Typo d'affichage ultra-lisible, forte personnalité (style cartoon bold)
-        display: ['"Bungee"', '"Bebas Neue"', 'Impact', 'sans-serif'],
+        display: ['"Bungee"', '"Bebas Neue"', 'Impact', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
         // Sous-titre western / americain (burger joint)
-        heading: ['"Alfa Slab One"', '"Rubik Mono One"', 'serif'],
+        heading: ['"Alfa Slab One"', '"Rubik Mono One"', 'serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
         // Corps de texte propre pour la lisibilité
-        body: ['"Inter"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
         // Accent manuscrit pour les bulles / citations (côté street/fun)
-        hand: ['"Caveat"', '"Patrick Hand"', 'cursive'],
+        hand: ['"Caveat"', '"Patrick Hand"', 'cursive', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
       },
       backgroundImage: {
         'diag-stripes':
