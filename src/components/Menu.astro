@@ -27,7 +27,7 @@ import { MENU } from '../data/site';
 
             <ul class="divide-y divide-ink/10">
               {cat.items.map((item) => (
-                <li class="flex items-center justify-between gap-4 py-3">
+                <li class="flex items-start justify-between gap-4 py-3">
                   <div class="flex-1">
                     <div class="flex flex-wrap items-center gap-2">
                       <span class="font-display text-base uppercase text-ink">{item.name}</span>
@@ -38,8 +38,16 @@ import { MENU } from '../data/site';
                         <span class="chip">👍 {item.rating}%</span>
                       ) : null}
                     </div>
+                    {'desc' in item && item.desc ? (
+                      <p class="mt-1 font-body text-xs leading-snug text-ink/60">{item.desc}</p>
+                    ) : null}
                   </div>
-                  <span class="whitespace-nowrap font-heading text-lg text-rooster">{item.price}</span>
+                  <div class="flex shrink-0 flex-col items-end whitespace-nowrap text-right">
+                    <span class="font-heading text-lg text-rooster">{item.price}</span>
+                    {'priceMenu' in item && item.priceMenu ? (
+                      <span class="font-body text-xs text-ink/60">{item.priceMenu}</span>
+                    ) : null}
+                  </div>
                 </li>
               ))}
             </ul>
