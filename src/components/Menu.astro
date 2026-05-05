@@ -2,9 +2,9 @@
 import { MENU } from '../data/site';
 ---
 
-<section id="menu" class="relative py-20 sm:py-28">
+<section id="menu" class="relative py-12 sm:py-28 bg-paper">
   <div class="container-x">
-    <div class="flex flex-col items-center text-center">
+    <div class="flex flex-col items-center text-center mb-10 sm:mb-16">
       <span class="section-eyebrow">Notre carte</span>
       <h2 class="section-title">Qu'est-ce qui te fait envie ?</h2>
       <p class="mt-4 max-w-2xl font-body text-ink/70">
@@ -13,54 +13,205 @@ import { MENU } from '../data/site';
       </p>
     </div>
 
-    <div class="mt-14 grid gap-8 lg:grid-cols-2">
+    <div class="space-y-12 sm:space-y-20">
       {
         MENU.map((cat) => (
-          <article class="card">
-            <header class="mb-6 flex items-center justify-between gap-3 border-b-2 border-dashed border-ink/20 pb-4">
-              <h3 class="flex items-center gap-3 font-heading text-2xl uppercase">
-                <span class="text-3xl" aria-hidden="true">{cat.emoji}</span>
+          <div id={cat.id} class="menu-category scroll-mt-24">
+            <header class="mb-6 sm:mb-8 border-b-2 border-dashed border-ink/20 pb-4">
+              <h3 class="flex items-center gap-3 font-heading text-2xl sm:text-3xl uppercase text-ink">
+                <span class="text-3xl sm:text-4xl" aria-hidden="true">{cat.emoji}</span>
                 {cat.cat}
               </h3>
+              <p class="mt-2 font-body text-base text-ink/70">{cat.desc}</p>
             </header>
-            <p class="mb-5 font-body text-sm text-ink/70">{cat.desc}</p>
 
-            <ul class="divide-y divide-ink/10">
+            <div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {cat.items.map((item) => (
-                <li class="flex items-start justify-between gap-4 py-3">
-                  <div class="flex-1">
-                    <div class="flex flex-wrap items-center gap-2">
-                      <span class="font-display text-base uppercase text-ink">{item.name}</span>
+                <article 
+                  class="menu-item-card group cursor-pointer flex flex-col bg-white rounded-2xl shadow-sm border border-ink/5 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  data-item={JSON.stringify(item)}
+                >
+                  <div class="relative h-36 sm:h-48 w-full overflow-hidden bg-ink/5">
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  
+                  <div class="flex flex-col flex-1 p-5">
+                    <div class="flex justify-between items-start gap-2 mb-2">
+                      <h4 class="font-display text-lg uppercase text-ink leading-tight">{item.name}</h4>
+                      <span class="font-heading text-lg text-rooster whitespace-nowrap">{item.price}</span>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-3">
                       {'tag' in item && item.tag ? (
-                        <span class="chip !bg-mustard/20 !text-mustard-700">{item.tag}</span>
+                        <span class="chip !py-0.5 !text-xs !bg-mustard/20 !text-mustard-700">{item.tag}</span>
                       ) : null}
                       {'rating' in item && item.rating ? (
-                        <span class="chip">👍 {item.rating}%</span>
+                        <span class="chip !py-0.5 !text-xs">👍 {item.rating}%</span>
                       ) : null}
                     </div>
+
                     {'desc' in item && item.desc ? (
-                      <p class="mt-1 font-body text-xs leading-snug text-ink/60">{item.desc}</p>
+                      <p class="font-body text-sm text-ink/60 line-clamp-2 mt-auto">{item.desc}</p>
                     ) : null}
                   </div>
-                  <div class="flex shrink-0 flex-col items-end whitespace-nowrap text-right">
-                    <span class="font-heading text-lg text-rooster">{item.price}</span>
-                    {'priceMenu' in item && item.priceMenu ? (
-                      <span class="font-body text-xs text-ink/60">{item.priceMenu}</span>
-                    ) : null}
-                  </div>
-                </li>
+                </article>
               ))}
-            </ul>
-          </article>
+            </div>
+          </div>
         ))
       }
     </div>
 
-    <div class="mt-12 text-center">
+    <div class="mt-12 sm:mt-20 text-center">
       <p class="mb-4 font-hand text-2xl text-ink/70">Faim ? Il suffit d'un clic 👇</p>
-      <a href="https://www.ubereats.com/fr/store/chicken-bens-colomiers/titmjAwnQrqk6hTChp-nkA" target="_blank" rel="noopener" class="btn-primary">
+      <a href="https://www.ubereats.com/fr/store/chicken-bens-colomiers/titmjAwnQrqk6hTChp-nkA" target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2">
         Commander sur Uber Eats
       </a>
     </div>
   </div>
+
+  <!-- Modal for Item Details -->
+  <dialog id="item-modal" class="backdrop:bg-ink/80 backdrop:backdrop-blur-sm rounded-2xl shadow-2xl p-0 w-[90%] max-w-lg overflow-hidden border-0 bg-white opacity-0 transition-opacity duration-300">
+    <div class="relative flex flex-col max-h-[90vh]">
+      <button id="close-modal" class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-ink shadow-sm hover:bg-white transition-colors" aria-label="Fermer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div class="w-full h-48 sm:h-64 bg-ink/5 shrink-0">
+        <img id="modal-image" src="" alt="" class="w-full h-full object-cover" />
+      </div>
+      
+      <div class="p-6 sm:p-8 overflow-y-auto">
+        <div class="flex justify-between items-start gap-4 mb-2">
+          <h3 id="modal-title" class="font-display text-2xl uppercase text-ink"></h3>
+          <div class="text-right shrink-0">
+            <div id="modal-price" class="font-heading text-2xl text-rooster"></div>
+            <div id="modal-price-menu" class="font-body text-sm text-ink/60"></div>
+          </div>
+        </div>
+        
+        <p id="modal-desc" class="font-body text-base text-ink/80 mb-6"></p>
+        
+        <div id="modal-allergens-container" class="mt-6 pt-6 border-t border-ink/10 hidden">
+          <h4 class="font-heading text-sm uppercase text-ink/50 tracking-wider mb-3">Allergènes</h4>
+          <div id="modal-allergens" class="flex flex-wrap gap-2">
+            <!-- Allergens injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
 </section>
+
+<script>
+  // Handle Modal logic
+  const modal = document.getElementById('item-modal') as HTMLDialogElement;
+  const closeBtn = document.getElementById('close-modal');
+  const cards = document.querySelectorAll('.menu-item-card');
+
+  // DOM Elements inside modal
+  const mImage = document.getElementById('modal-image') as HTMLImageElement;
+  const mTitle = document.getElementById('modal-title');
+  const mPrice = document.getElementById('modal-price');
+  const mPriceMenu = document.getElementById('modal-price-menu');
+  const mDesc = document.getElementById('modal-desc');
+  const mAllergensContainer = document.getElementById('modal-allergens-container');
+  const mAllergens = document.getElementById('modal-allergens');
+
+  // Open modal on card click
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const itemData = JSON.parse(card.getAttribute('data-item') || '{}');
+      
+      if(mImage) { mImage.src = itemData.image || ''; mImage.alt = itemData.name; }
+      if(mTitle) mTitle.textContent = itemData.name;
+      if(mPrice) mPrice.textContent = itemData.price;
+      
+      if(mPriceMenu) {
+        mPriceMenu.textContent = itemData.priceMenu || '';
+      }
+      
+      if(mDesc) {
+        mDesc.textContent = itemData.desc || '';
+      }
+
+      if(mAllergens && mAllergensContainer) {
+        mAllergens.innerHTML = ''; // clear previous
+        if (itemData.allergens && itemData.allergens.length > 0) {
+          itemData.allergens.forEach((allergene: string) => {
+            const span = document.createElement('span');
+            span.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rooster/10 text-rooster border border-rooster/20';
+            span.textContent = allergene;
+            mAllergens.appendChild(span);
+          });
+          mAllergensContainer.classList.remove('hidden');
+        } else {
+          const span = document.createElement('span');
+          span.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ink/5 text-ink/60 border border-ink/10';
+          span.textContent = 'Aucun allergène déclaré';
+          mAllergens.appendChild(span);
+          mAllergensContainer.classList.remove('hidden');
+        }
+      }
+
+      modal.showModal();
+      // small delay to allow display block before opacity transition
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.classList.add('opacity-100');
+      }, 10);
+    });
+  });
+
+  // Close modal functions
+  const closeModal = () => {
+    modal.classList.remove('opacity-100');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.close();
+    }, 300); // wait for transition
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+
+  // Close when clicking outside
+  modal?.addEventListener('click', (e) => {
+    const dialogDimensions = modal.getBoundingClientRect()
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      closeModal();
+    }
+  });
+</script>
+
+<style>
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+  }
+
+  dialog[open] {
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Prevent scrolling on body when modal is open */
+  :global(body:has(dialog[open])) {
+    overflow: hidden;
+  }
+</style>
