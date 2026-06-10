@@ -12,9 +12,9 @@ const mapsQuery = encodeURIComponent(
       <h2 class="section-title">On t'attend de pied ferme</h2>
     </div>
 
-    <div class="mt-14 grid gap-8 lg:grid-cols-5">
+    <div class="mt-14 grid gap-8 lg:grid-cols-2">
       <!-- Infos -->
-      <div class="lg:col-span-2">
+      <div>
         <div class="card h-full">
           <h3 class="font-heading text-2xl uppercase">Le restaurant</h3>
           <p class="mt-2 font-hand text-2xl text-rooster">Colomiers · 31770</p>
@@ -72,8 +72,52 @@ const mapsQuery = encodeURIComponent(
         </div>
       </div>
 
-      <!-- Carte -->
-      <div class="lg:col-span-3">
+      <!-- Formulaire -->
+      <div>
+        <div class="card h-full">
+          <h3 class="font-heading text-2xl uppercase">Nous écrire</h3>
+          <form data-api-form="chicken" class="mt-6 flex flex-col gap-4">
+            <div>
+              <label for="nom" class="sr-only">Nom complet</label>
+              <input type="text" id="nom" name="nom" required placeholder="Ton nom" class="w-full rounded-md border border-ink/20 bg-transparent px-4 py-3 font-body text-ink placeholder:text-ink/50 focus:border-rooster focus:outline-none focus:ring-1 focus:ring-rooster" />
+            </div>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Ton email" class="w-full rounded-md border border-ink/20 bg-transparent px-4 py-3 font-body text-ink placeholder:text-ink/50 focus:border-rooster focus:outline-none focus:ring-1 focus:ring-rooster" />
+              </div>
+              <div>
+                <label for="telephone" class="sr-only">Téléphone</label>
+                <input type="tel" id="telephone" name="telephone" placeholder="Ton téléphone" class="w-full rounded-md border border-ink/20 bg-transparent px-4 py-3 font-body text-ink placeholder:text-ink/50 focus:border-rooster focus:outline-none focus:ring-1 focus:ring-rooster" />
+              </div>
+            </div>
+
+            <div>
+              <label for="sujet" class="sr-only">Sujet</label>
+              <select id="sujet" name="sujet" required class="w-full rounded-md border border-ink/20 bg-transparent px-4 py-3 font-body text-ink focus:border-rooster focus:outline-none focus:ring-1 focus:ring-rooster">
+                <option value="" disabled selected>Choisis un sujet...</option>
+                <option value="Information">Demande d'information</option>
+                <option value="Commande">Question sur une commande</option>
+                <option value="Autre">Autre demande</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="sr-only">Message</label>
+              <textarea id="message" name="message" required rows="4" placeholder="Ton message..." class="w-full resize-none rounded-md border border-ink/20 bg-transparent px-4 py-3 font-body text-ink placeholder:text-ink/50 focus:border-rooster focus:outline-none focus:ring-1 focus:ring-rooster"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary mt-2 w-full justify-center">
+              Envoyer le message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carte -->
+    <div class="mt-8">
         <div class="poster h-full min-h-[400px] overflow-hidden !p-0">
           <iframe
             title={`Plan - ${SITE.name} Colomiers`}
